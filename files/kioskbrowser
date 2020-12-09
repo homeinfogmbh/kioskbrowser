@@ -1,0 +1,8 @@
+#! /usr/bin/env python3
+"""Kiosk browser run script."""
+
+from kioskbrowser import launch
+
+
+if __name__ == '__main__':
+    launch()
