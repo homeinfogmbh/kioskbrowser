@@ -14,7 +14,7 @@ __all__ = ['process']
 
 
 CHROMIUM = '/usr/bin/chromium'
-CONFIG_FILE = Path('/usr/local/etc/kioskbrowser.conf')
+CONFIG_FILE = Path('/etc/kioskbrowser.conf')
 LOGGER = getLogger(__file__)
 
 
