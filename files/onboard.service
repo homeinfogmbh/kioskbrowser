@@ -1,7 +1,7 @@
 [Unit]
 Description=Onboard on-screen keyboard
 After=kioskbrowser.service
-Wants=xorg-server.service
+BindsTo=kioskbrowser.service
 
 [Service]
 User=digsig

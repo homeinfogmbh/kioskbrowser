@@ -1,8 +1,8 @@
 [Unit]
 Description=Kiosk browser
-After=network-online.target
-Requires=network-online.target
-Wants=xorg-server.service
+After=network-online.target xorg-server.service
+Requires=network-online.target xorg-server.service
+Wants=onboard.service
 
 [Service]
 User=digsig
