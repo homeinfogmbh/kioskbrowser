@@ -9,8 +9,7 @@ User=digsig
 Group=digsig
 Environment=DISPLAY=:0
 #ExecStartPre=/usr/bin/ping -c 3 -w 3 8.8.8.8
-ExecStart=/usr/local/bin/kioskbrowser
-ExecStartPost=/usr/bin/kiosk
+ExecStart=/usr/bin/kioskbrowser
 Restart=always
 RestartSec=3
 
