@@ -10,6 +10,7 @@ Group=digsig
 Environment=DISPLAY=:0
 #ExecStartPre=/usr/bin/ping -c 3 -w 3 8.8.8.8
 ExecStart=/usr/bin/kioskbrowser
+ExecStartPost=/usr/bin/xsetroot -cursor_name arrow
 Restart=always
 RestartSec=3
 
