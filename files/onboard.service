@@ -1,0 +1,17 @@
+[Unit]
+Description=Onboard on-screen keyboard
+After=kioskbrowser.service
+Wants=xorg-server.service
+
+[Service]
+User=digsig
+Group=digsig
+Environment=DISPLAY=:0
+ExecStartPre=/usr/bin/sleep 15
+ExecStartPre=/usr/bin/setxkbmap de
+ExecStart=/usr/bin/dbus-run-session /usr/bin/onboard -a -l Kiosk
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
