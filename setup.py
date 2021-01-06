@@ -13,7 +13,7 @@ setup(
     maintainer_email='mail@richard-neumann.de',
     python_requires='>=3.8',
     packages=['kioskbrowser'],
-    scripts=['files/kioskbrowser'],
+    entry_points={'console_scripts': ['kioskbrowser = kioskbrowser:launch']},
     url='https://github.com/homeinfogmbh/kioskbrowser',
     license='GPLv3',
     description='A kiosk browser solution based on chromium.',
