@@ -27,7 +27,12 @@ def get_value(value: object) -> bytes:
     return VALUE_PREFIX + str(value).encode()
 
 
-def set_ext_key(database: Path, extension: str, key: str, value: object):
+def set_ext_key(
+        database: Path,
+        extension: str,
+        key: str,
+        value: object
+) -> None:
     """Sets the value to the key of the given extension."""
 
     DB(str(database)).put(get_key(extension, key), get_value(value))

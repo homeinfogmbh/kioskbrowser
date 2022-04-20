@@ -3,14 +3,13 @@
 from configparser import NoOptionError, ConfigParser
 from logging import DEBUG, INFO, basicConfig, getLogger
 from pathlib import Path
-from sys import exit  # pylint: disable=W0622
 from typing import List
 from urllib.parse import urlparse
 
 from kioskbrowser.idle_reset import configure
 
 
-__all__ = ['process']
+__all__ = ['get_command']
 
 
 CHROMIUM = '/usr/bin/chromium'
@@ -18,25 +17,25 @@ CONFIG_FILE = Path('/etc/kioskbrowser.conf')
 LOGGER = getLogger(__file__)
 
 
-def process() -> List[str]:
-    """Start the kiosk browser."""
+def get_command() -> List[str]:
+    """Returns the kiosk browser command."""
 
     config = ConfigParser()
 
     if not config.read(CONFIG_FILE):
         LOGGER.error('Cannot read config file.')
-        exit(1)
+        raise SystemExit(1)
 
     debug = config.getboolean('kiosk', 'debug', fallback=False)
     basicConfig(level=DEBUG if debug else INFO)
     chromium = config.get('kiosk', 'chromium', fallback=CHROMIUM)
-    command = [chromium,'--kiosk', '--fullscreen']
+    command = [chromium, '--kiosk', '--fullscreen']
 
     try:
         url = config.get('kiosk', 'url')
     except NoOptionError:
         LOGGER.error('No URL specified.')
-        exit(2)
+        raise SystemExit(2)
 
     timeout = config.getint('kiosk', 'timeout', fallback=30)
     configure(url=url, seconds=timeout)

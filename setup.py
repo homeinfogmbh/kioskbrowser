@@ -12,6 +12,7 @@ setup(
     maintainer='Richard Neumann',
     maintainer_email='mail@richard-neumann.de',
     python_requires='>=3.8',
+    install_requires=['plyvel'],
     packages=['kioskbrowser'],
     entry_points={'console_scripts': ['kioskbrowser = kioskbrowser:launch']},
     url='https://github.com/homeinfogmbh/kioskbrowser',
