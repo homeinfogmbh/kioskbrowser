@@ -5,7 +5,6 @@ from setuptools import setup
 
 setup(
     name='kioskbrowser',
-    version_format='{tag}',
     use_scm_version={
         "local_scheme": "node-and-timestamp"
     },
