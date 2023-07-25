@@ -5,10 +5,10 @@ from pathlib import Path
 from kioskbrowser.leveldb import LOCALSTORAGE, set_ext_key
 
 
-__all__ = ['configure']
+__all__ = ["configure"]
 
 
-EXTENSION_ID = 'nnaoeblcffjlledmikadmhhfhjpolcjd'
+EXTENSION_ID = "nnaoeblcffjlledmikadmhhfhjpolcjd"
 
 
 def configure(**kwargs):

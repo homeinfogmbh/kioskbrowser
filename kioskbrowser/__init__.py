@@ -3,4 +3,4 @@
 from kioskbrowser.launcher import launch
 
 
-__all__ = ['launch']
+__all__ = ["launch"]

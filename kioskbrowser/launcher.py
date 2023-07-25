@@ -5,7 +5,7 @@ from subprocess import check_call
 from kioskbrowser.config import get_command
 
 
-__all__ = ['launch']
+__all__ = ["launch"]
 
 
 def launch() -> int:

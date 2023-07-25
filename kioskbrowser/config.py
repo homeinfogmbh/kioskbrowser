@@ -9,11 +9,11 @@ from urllib.parse import urlparse
 from kioskbrowser.idle_reset import configure
 
 
-__all__ = ['get_command']
+__all__ = ["get_command"]
 
 
-CHROMIUM = '/usr/bin/chromium'
-CONFIG_FILE = Path('/etc/kioskbrowser.conf')
+CHROMIUM = "/usr/bin/chromium"
+CONFIG_FILE = Path("/etc/kioskbrowser.conf")
 LOGGER = getLogger(__file__)
 
 
@@ -23,53 +23,53 @@ def get_command() -> List[str]:
     config = ConfigParser()
 
     if not config.read(CONFIG_FILE):
-        LOGGER.error('Cannot read config file.')
+        LOGGER.error("Cannot read config file.")
         raise SystemExit(1)
 
-    debug = config.getboolean('kiosk', 'debug', fallback=False)
+    debug = config.getboolean("kiosk", "debug", fallback=False)
     basicConfig(level=DEBUG if debug else INFO)
-    chromium = config.get('kiosk', 'chromium', fallback=CHROMIUM)
-    command = [chromium, '--kiosk', '--fullscreen']
+    chromium = config.get("kiosk", "chromium", fallback=CHROMIUM)
+    command = [chromium, "--kiosk", "--fullscreen"]
 
     try:
-        url = config.get('kiosk', 'url')
+        url = config.get("kiosk", "url")
     except NoOptionError:
-        LOGGER.error('No URL specified.')
+        LOGGER.error("No URL specified.")
         raise SystemExit(2)
 
-    timeout = config.getint('kiosk', 'timeout', fallback=30)
+    timeout = config.getint("kiosk", "timeout", fallback=30)
     configure(url=url, seconds=timeout)
 
-    if config.getboolean('kiosk', 'incognito', fallback=False):
-        command.append('--incognito')
+    if config.getboolean("kiosk", "incognito", fallback=False):
+        command.append("--incognito")
 
     command.append(url)
 
-    if config.getboolean('kiosk', 'extensions', fallback=False):
-        command.append('--enable-extensions')
+    if config.getboolean("kiosk", "extensions", fallback=False):
+        command.append("--enable-extensions")
 
     command.append(url)
 
-    if config.getboolean('kiosk', 'file-access-from-files', fallback=False):
-        command.append('--allow-file-access-from-files')
+    if config.getboolean("kiosk", "file-access-from-files", fallback=False):
+        command.append("--allow-file-access-from-files")
 
     command.append(url)
 
-    if config.getboolean('kiosk', 'disable-web-security', fallback=False):
-        command.append('--disable-web-security')
+    if config.getboolean("kiosk", "disable-web-security", fallback=False):
+        command.append("--disable-web-security")
 
     command.append(url)
-    resolution = config.get('kiosk', 'resolution', fallback='1920,1080')
-    command.append(f'--window-size={resolution}')
-    position = config.get('kiosk', 'position', fallback='0,0')
-    command.append(f'--window-position={position}')
+    resolution = config.get("kiosk", "resolution", fallback="1920,1080")
+    command.append(f"--window-size={resolution}")
+    position = config.get("kiosk", "position", fallback="0,0")
+    command.append(f"--window-position={position}")
     host = urlparse(url).netloc
-    host_rules = [f'MAP * {host}']
+    host_rules = [f"MAP * {host}"]
 
-    for exclude in config.get('kiosk', 'exclude', fallback='').split():
-        host_rules.append(f'EXCLUDE {exclude}')
+    for exclude in config.get("kiosk", "exclude", fallback="").split():
+        host_rules.append(f"EXCLUDE {exclude}")
 
-    host_rules = ', '.join(host_rules)
-    command.append(f'--host-resolver-rules={host_rules}')
-    LOGGER.debug('Assembled command: %s', command)
+    host_rules = ", ".join(host_rules)
+    command.append(f"--host-resolver-rules={host_rules}")
+    LOGGER.debug("Assembled command: %s", command)
     return command
